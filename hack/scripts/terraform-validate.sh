@@ -40,6 +40,8 @@ color_red="\\e[31m"
 color_green="\\e[32m"
 color_blue="\\e[36m";
 
+result_code=0
+
 function echo_fail { echo -e "${color_red}✖ $*${reset_color}"; }
 function echo_success { echo -e "${color_green}✔ $*${reset_color}"; }
 function echo_info { echo -e "${color_blue}$*${reset_color}"; }
@@ -61,6 +63,7 @@ function check_result() {
     else
         echo_fail "KO: ${action}"
         cat "${data}"
+        result_code=1
     fi
 }
 
@@ -103,3 +106,4 @@ DEBUG=${2:-""}
 
 check_infra "terraform/${cloud_provider}"
 echo_info "Terraform validation completed"
+exit ${result_code}
