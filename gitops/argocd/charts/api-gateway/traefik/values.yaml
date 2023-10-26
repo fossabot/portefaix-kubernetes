@@ -77,7 +77,7 @@ traefik:
           expr: avg(traefik_service_open_connections) > 50
           for: 5m
           labels:
-            severity:
+            severity: warning
         - alert: TraefikHighHttp4xxErrorRateService
           expr: sum(rate(traefik_service_requests_total{code=~"4.*"}[3m])) by (service) / sum(rate(traefik_service_requests_total[3m])) by (service) * 100 > 5
           for: 5m
