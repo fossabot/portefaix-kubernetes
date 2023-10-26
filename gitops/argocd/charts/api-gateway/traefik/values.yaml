@@ -19,6 +19,9 @@ grafana:
   # Grafana folder in which to store the dashboards
   folder: networking
 
+ingress:
+  enabled: false
+
 traefik:
   commonLabels:
     portefaix.xyz/version: v0.46.0
@@ -28,9 +31,16 @@ traefik:
     isDefaultClass: false
     name: traefik
 
+  experimental:
+    kubernetesGateway:
+      enabled: true
+
   ingressRoute:
     dashboard:
-      enabled: true
+      enabled: false
+
+  additionalArguments:
+  - "--api.insecure=true"
 
   providers:
     # Enable cross namespace references
